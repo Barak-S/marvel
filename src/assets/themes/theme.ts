@@ -1,70 +1,91 @@
+import { red } from '@material-ui/core/colors';
 import { createTheme } from '@material-ui/core/styles';
+import { colors } from '../../styles/colors';
+
+const mainFont = 'Rubik, sans-serif';
 
 export default createTheme({
-    palette: {
-        primary: { 
-            main: '#2b4061', 
-        },
-        secondary: { 
-            main: '#F3BD48' 
-        },
+  palette: {
+    primary: {
+      main: colors.red,
     },
-    overrides: {
-        MuiButton: {
-            contained: {
-                // minWidth: 88,
-                // padding: '3px 16px',
-                // backgroundColor: '#2b4061',
-                // color: '#FFF',
-                // fontWeight: 500,
-                // borderRadius: 30,
-                // '&:hover': {
-                //     backgroundColor: '#cd9a37',
-                // }
-            },
-            outlined: {
-                // padding: '3px 12px',
-                // borderRadius: 30
-            },
-            textSecondary: {
-                // backgroundColor: '#11274B',
-                // color: '#FFF',
-                // '&:hover': {
-                //     border: 'solid 1px #11274B',
-                //     color: '#11274B',
-                // }
-            }
-        },
+    secondary: {
+      main: colors.red,
     },
-    typography: {
-        // fontFamily: [
-        //     'Sentinel-Black',
-        //     'Roboto',
-        //     'sans-serif'
-        // ].join(','),
-        h1: {
-            color: 'inherit',
+    error: {
+      main: red.A400,
+    },
+    background: {
+      default: colors.white,
+    },
+  },
+  typography: {
+    fontFamily: '"Rubik", sans-serif',
+  },
+  overrides: {
+    MuiInputBase: {
+      root: {
+        height: '100%',
+        borderRadius: 6,
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
+        '&.Mui-focused > .MuiInputBase-input': {
+          background: colors.white,
+          color: colors.black,
+          border: `3px solid ${colors.red}`,
         },
-        h2: {
-            color: 'inherit',
+        '&.Mui-focused.Mui-error > .MuiInputBase-input': {
+          color: colors.red,
         },
-        h3: {
-            color: 'inherit',
+        '&.Mui-focused > .MuiInputAdornment-positionStart': {
+          borderColor: colors.white,
         },
-        h4: {
-            color: 'inherit',
+      },
+      input: {
+        border: `3px solid ${colors.red}`,
+        boxSizing: 'border-box',
+        fontSize: 18,
+        borderRadius: 30,
+        height: 55,
+        minWidth: 144,
+        display: 'flex',
+        alignItems: 'center',
+        // color: colors.red,
+        fontFamily: mainFont,
+        background: colors.white,
+        paddingLeft: 10,
+        boxShadow: 'none',
+        WebkitAppearance: 'none',
+      },
+    },
+    MuiInput: {
+      underline: {
+        '&:before, &:after': {
+          content: 'none',
         },
-        h5: {
-            color: 'inherit',
+      },
+    },
+    MuiInputLabel: {
+      formControl: {
+        transform: 'translate(15px, 20px) scale(1)',
+        textTransform: 'capitalize',
+        zIndex: 1,
+        fontSize: 14,
+      },
+      root: {
+        '&.Mui-focused:not(.Mui-error)': {
+          color: colors.black,
         },
-        h6: {
-            color: 'inherit',
+        '&.Mui-focused:not(.Mui-error) + .MuiInputBase-root > .MuiInputBase-input': {
+          border: `1px solid ${colors.white}`,
         },
-        button: {
-            color: 'inherit',
-            fontSize: '16px',
-            letterSpacing: '1.25px',
-            textTransform: 'none'
+        '& + .MuiInput-formControl': {
+          marginTop: 0,
         },
-    }
+      },
+      shrink: {
+        transform: 'translate(0, -18px) scale(.75)',
+      },
+    },
+  },
 });

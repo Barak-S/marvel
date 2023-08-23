@@ -1,138 +1,59 @@
-import React, { FC, useState } from 'react';
-import { colors, StyleProps } from '../../styles';
-import { AppBar, Container, useMediaQuery, useTheme, Button, makeStyles } from '@material-ui/core';
-import Logo from '../../assets/images/Logo.png';
-import { FiMenu, FiX } from 'react-icons/fi';
-import SocialSection from '../../components/SocialSection';
-import { useHistory } from 'react-router-dom';
-import NavMenuItem from './components/NavMenuItem';
+import React, { FC, useState } from 'react'
+import { colors, StyleProps } from '../../styles'
+import { AppBar, Container, useMediaQuery, useTheme, Button, makeStyles } from '@material-ui/core'
+import Logo from '../../assets/images/Marvel-Comics-logo.png'
+import { FiMenu, FiX } from 'react-icons/fi'
+import { useHistory } from 'react-router-dom'
+import NavMenuItem from './components/NavMenuItem'
 
-type Props = StyleProps;
+type Props = StyleProps
 
 const NavBarLayout: FC<Props> = ({ style }) => {
-    const theme = useTheme();
-    const classes = useStyles();
-    const history = useHistory();
+    const theme = useTheme()
+    const classes = useStyles()
+    const history = useHistory()
     const [open, setOpen] = useState(false)
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
     return (
         <AppBar position="fixed" className={classes.appBar}>
             <Container className={classes.container}>
                 <div className={classes.navigationBar}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img 
+                        <img
                             onClick={()=> !isMobile ? history.push('/') : undefined}
-                            src={Logo} 
-                            style={{ 
-                                height: isMobile ? open ? 36 : 52 : 104, 
+                            src={Logo}
+                            style={{
+                                height: isMobile ? open ? 36 : 52 : 55,
                                 cursor: 'pointer' ,
                                 display: isMobile ? 'none' : 'initial'
-                            }} 
+                            }}
                         />
-                        <div className={classes.linkSection}>
-                            <NavMenuItem 
-                                label={'About'} 
-                                path={`/#about`}
-                            />
-                            <NavMenuItem 
-                                label={'FAQ'} 
-                                path={`/#faq`}
-                            />
-                            <NavMenuItem 
-                                label={'Team'} 
-                                path={`/#team`}
-                            />
-                        </div>
                     </div>
-                    {isMobile && (
-                        open ? 
-                        (<FiX size={32} className={classes.menuToggle} onClick={()=>setOpen(false)} />)
-                        :
-                        (<FiMenu size={32} color={colors.white} className={classes.menuToggle} onClick={()=>setOpen(true)} />)
-                    )}
-                    <SocialSection style={{ marginLeft: 62, display: isMobile ? 'none' : 'flex' }} />
+                    <NavMenuItem
+                      label={'My Team'}
+                    />
                 </div>
             </Container>
-            {isMobile ? (
-                <div className={classes.mobileMenu} style={{ transform: open ? 'translateX(0%)' : 'translateY(-100%)', transition: '0.3s ease'}}>
-                    <div className={classes.linkSectionMobile}>
-                        <NavMenuItem 
-                            handleClick={()=> setOpen(false)} 
-                            label={'About'} 
-                            path={`/#about`}
-                        />
-                        <NavMenuItem 
-                            handleClick={()=> setOpen(false)} 
-                            label={'FAQ'} 
-                            path={`/#faq`}
-                        />
-                        <NavMenuItem 
-                            handleClick={()=> setOpen(false)} 
-                            label={'Team'}
-                            path={`/#team`} 
-                        />
-                        <SocialSection style={{ margin: '0 auto' }} />
-                    </div>
-                </div>
-            ):(
-                undefined
-            )}
         </AppBar>
-    );
-};
+    )
+}
 
   const useStyles = makeStyles(theme => ({
     container: {
-        height: 139,
+        height: 86,
         maxWidth: 1730,
         display: 'flex',
         width: '100%',
-        zIndex: 999,
+        zIndex: 1,
         [theme.breakpoints.down('sm')]:{
-            height: 87
+            height: 50
         }
     },
     appBar: {
         boxShadow: 'none',
-        zIndex: 990,
-        backgroundColor: colors.grey,
-    },
-    connectWallet: {
-        width: 238,
-        height: 72,
-        border: `3px solid ${colors.white}`,
-        backgroundColor: colors.white,
-        color: colors.black,
-        fontWeight: 500,
-        borderRadius: 36,
-        marginLeft: 41,
-        fontSize: 19,
-        '&:hover': {
-            backgroundColor: '#464545',
-            color: colors.white,
-        },
-        [theme.breakpoints.down('sm')]: {
-            border: `3px solid ${colors.white}`,
-            backgroundColor: colors.black,
-            color: colors.white,
-            margin: '0 auto',
-            marginBottom: 16,
-        }
-    },
-    menuToggle: {},
-    menuCloseToggle: {
-        position: 'absolute',
-        top: 31,
-        left: 20,
-    },
-    mobileMenu: {
-        height: '100%',
+        // zIndex: 1,
         backgroundColor: colors.black,
-        width: '100%',
-        display: 'flex',
-        zIndex: 990,
-        position: 'fixed',
     },
     navigationBar: {
         display: 'flex',
@@ -144,19 +65,6 @@ const NavBarLayout: FC<Props> = ({ style }) => {
         [theme.breakpoints.down('sm')]:{
             justifyContent: 'start',
         }
-    },
-    linkSection :{
-        display: 'flex',
-        alignItems: 'center',
-        [theme.breakpoints.down('sm')]:{
-            display: 'none'
-        }
-    },
-    linkSectionMobile: {
-        display: 'flex',
-        flexDirection: 'column',
-        paddingTop: 65,
-        width: '100%',
     },
     menuItem: {
         textTransform: 'uppercase',
@@ -188,4 +96,4 @@ const NavBarLayout: FC<Props> = ({ style }) => {
 
   }))
 
-export default NavBarLayout;
+export default NavBarLayout
