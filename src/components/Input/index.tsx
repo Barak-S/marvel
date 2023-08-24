@@ -9,10 +9,10 @@ interface Props extends InputProps {
 }
 
 export const FormInput: FC<Props> = ({ startIcon, className, style, inputProps, error, helperText, ...props }) => {
-  const classes = useClasses()
+  const classes = useStyles()
   return (
     <Input
-      className={cx(classes.container, error && classes.containerError, className)}
+      className={cx(classes.input, error && classes.containerError, className)}
       startAdornment={startIcon}
       error={error}
       {...props}
@@ -20,21 +20,24 @@ export const FormInput: FC<Props> = ({ startIcon, className, style, inputProps, 
   )
 }
 
-const useClasses = makeStyles({
-  container: {
-    width: 160,
+const useStyles = makeStyles(theme => ({
+  input: {
+    // width: 160,
     '& input::placeholder': {
       fontSize: '16px',
       color: colors.grey,
       opacity: 1,
     },
+    // [theme.breakpoints.down('sm')]: {
+    //   width: '100%'
+    // }
   },
   containerError: {
     '& input::placeholder': {
       color: colors.red,
     },
   },
-})
+}))
 
 export type FormInputProps = Props;
 export default FormInput

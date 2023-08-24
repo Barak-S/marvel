@@ -42,11 +42,9 @@ export const MyList: FC<Props> = ({ className, style }) => {
         }
       })
     }
-
     powers.forEach((power) => {
       result[power] = Math.round((result[power] / (Object.keys(myList)?.length * 100)) * 100)
     })
-
     return result
   }
 
@@ -102,13 +100,21 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     width: '100%',
     position: 'relative',
+    maxHeight: 'calc(100vh - 50px)',
     backgroundColor: colors.black,
+    [theme.breakpoints.down('sm')]: {
+      overflowY: 'auto'
+    }
   },
   cardWrapper: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     gap: 18,
-    paddingTop: 26
+    paddingTop: 26,
+    [theme.breakpoints.down('sm')]: {
+      overflowY: 'auto'
+    }
   },
   sectionRow: {
     display: 'flex',

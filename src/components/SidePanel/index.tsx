@@ -113,6 +113,9 @@ const useStyles = makeStyles(theme => ({
     transition: '0.3s ease-out',
     backgroundColor: colors.black,
     boxShadow: '-10px 0px 10px rgba(0, 0, 0, 0.2)',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    }
   },
   sidePanelHeader: {
     position: 'relative',

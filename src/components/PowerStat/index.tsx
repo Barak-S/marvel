@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { StyleProps, colors } from '../../styles'
-import { Typography, CircularProgress } from '@material-ui/core'
+import { Typography, CircularProgress, useMediaQuery, useTheme, Theme } from '@material-ui/core'
 
 interface Props extends StyleProps {
   value: string;
@@ -10,6 +10,8 @@ interface Props extends StyleProps {
 
 export const PowerStat: FC<Props> = ({ value, label, style }) => {
   const classes = useStyles()
+  const theme: Theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const hasNoVal = () => {
     return !!(!value || value === 'N/A' || value === 'null')
   }
@@ -20,7 +22,7 @@ export const PowerStat: FC<Props> = ({ value, label, style }) => {
         <Typography className={classes.noValue}>{'N/A'}</Typography>
       ) : (
         <>
-          <CircularProgress size={44} variant="determinate" value={parseInt(value)} />
+          <CircularProgress size={isMobile ? 33 : 44} variant="determinate" value={parseInt(value)} />
           <Typography className={classes.value}>{value}</Typography>
         </>
       )}
@@ -28,7 +30,7 @@ export const PowerStat: FC<Props> = ({ value, label, style }) => {
   )
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -38,6 +40,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: 26,
     color: colors.red,
     paddingBottom: 8,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 22,
+    }
   },
   value: {
     color: colors.white,

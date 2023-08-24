@@ -114,13 +114,17 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     flexDirection: 'column',
     position: 'relative',
-    backgroundColor: '#852324'
+    backgroundColor: '#852324',
+    overflow: 'hidden'
   },
   searchContainer: {
     display: 'flex',
     flexDirection: 'column',
     zIndex: 2,
-    alignItems: 'center'
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
   },
   resultsContainer: {
     display: 'flex',
@@ -131,13 +135,20 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     overflow: 'scroll',
     height: 'calc(100vh - 256px)',
-    paddingBottom: 65
+    paddingBottom: 65,
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 35,
+      height: 'calc(100vh - 203px)',
+    }
   },
   scrollUp: {
     transform: 'translateY(-100vh)'
   },
   input: {
     width: 500,
+    [theme.breakpoints.down('md')]: {
+      width: '100%'
+    }
   },
   loading: {
     margin: '0 auto'
@@ -146,7 +157,10 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: 86,
     zIndex: 3,
-    transition: '0.3s ease'
+    transition: '0.3s ease',
+    [theme.breakpoints.down('sm')]: {
+      top: 50,
+    }
   }
 }))
 
