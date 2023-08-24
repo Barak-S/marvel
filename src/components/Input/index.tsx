@@ -22,15 +22,11 @@ export const FormInput: FC<Props> = ({ startIcon, className, style, inputProps, 
 
 const useStyles = makeStyles(theme => ({
   input: {
-    // width: 160,
     '& input::placeholder': {
       fontSize: '16px',
       color: colors.grey,
       opacity: 1,
     },
-    // [theme.breakpoints.down('sm')]: {
-    //   width: '100%'
-    // }
   },
   containerError: {
     '& input::placeholder': {

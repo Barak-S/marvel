@@ -67,9 +67,6 @@ const NavBarLayout: FC<Props> = ({ style }) => {
       alignItems: 'center',
       height: '100%',
       position: 'relative',
-      [theme.breakpoints.down('sm')]:{
-        // justifyContent: 'start',
-      }
     },
     menuItem: {
       textTransform: 'uppercase',
