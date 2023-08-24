@@ -4,17 +4,19 @@ import { StyleProps, colors } from '../../styles'
 import { SuperHero } from '../../core'
 import { Typography } from '@material-ui/core'
 import cx from 'classnames'
-import { BsArrowBarLeft, BsFillBookmarkFill } from 'react-icons/bs'
+import { BsArrowBarLeft } from 'react-icons/bs'
 import { PowerStat } from '../PowerStat'
+import { MyListToggle } from '../MyListToggle'
 
 interface Props extends StyleProps {
   selectedHero: SuperHero,
   onClose: () => void,
-  myList: Record<string, SuperHero>,
   addToList: (superhero: SuperHero) => void,
+  isActive: boolean;
+  disabled: boolean;
 }
 
-export const SidePanel: FC<Props> = ({ selectedHero, onClose, myList, addToList, style }) => {
+export const SidePanel: FC<Props> = ({ selectedHero, onClose, isActive, disabled, addToList, style }) => {
   const classes = useStyles()
   return (
     <div
@@ -40,13 +42,12 @@ export const SidePanel: FC<Props> = ({ selectedHero, onClose, myList, addToList,
       >
         <div className={cx(classes.heroDetails, classes.heroDetailsLarge)}>
           <Typography className={classes.selectedHeroName}>{selectedHero?.name}</Typography>
-            <BsFillBookmarkFill
+          <MyListToggle
             onClick={() => addToList(selectedHero)}
-            size={22}
-            color={!!myList[selectedHero.id] ? colors.red : colors.grey}
+            isActive={isActive}
+            disabled={disabled}
           />
         </div>
-
         <div className={classes.sectionDetailsWrapper}>
           <div className={classes.sectionRow}>
             <PowerStat label={'Combat'} value={selectedHero?.powerstats?.['combat']} />
@@ -115,6 +116,8 @@ const useStyles = makeStyles(theme => ({
     boxShadow: '-10px 0px 10px rgba(0, 0, 0, 0.2)',
     [theme.breakpoints.down('sm')]: {
       width: '100%',
+      top: 50,
+      height: 'calc(100vh - 50px)',
     }
   },
   sidePanelHeader: {

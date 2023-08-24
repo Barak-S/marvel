@@ -2,9 +2,9 @@ import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { ClassNameProps, colors } from '../../styles'
 import { SuperHero } from '../../core'
-import { Typography, Tooltip, IconButton } from '@material-ui/core'
-import { BsFillBookmarkFill } from 'react-icons/bs'
+import { Typography } from '@material-ui/core'
 import cx from 'classnames'
+import { MyListToggle } from '../MyListToggle'
 
 interface Props extends ClassNameProps {
   superhero: SuperHero;
@@ -28,17 +28,14 @@ export const HeroCard: FC<Props> = ({ superhero, addToList, openSidePanel, isAct
         <Typography
           className={classes.heroName}
           onClick={() => openSidePanel()}
-        >{superhero.name}</Typography>
-        <Tooltip placement="top" title={(disabled && !isActive) ? 'My list is full' : !isActive ? 'Add' : 'Remove'}>
-          <IconButton>
-            <BsFillBookmarkFill
-              onClick={() => (disabled && !isActive) ? null : addToList()}
-              size={22}
-              color={isActive ? colors.red : colors.grey}
-              style={{ opacity: (disabled && !isActive) ? 0.5 : 1, cursor: (disabled && !isActive) ? 'initial' : 'pointer' }}
-            />
-          </IconButton>
-        </Tooltip>
+        >
+          {superhero.name}
+        </Typography>
+        <MyListToggle
+          onClick={() => addToList()}
+          isActive={isActive}
+          disabled={disabled}
+        />
       </div>
     </div>
   )

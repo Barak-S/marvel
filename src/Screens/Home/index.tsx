@@ -94,8 +94,9 @@ const Home: FC<Props> = ({ style }) => {
       <SidePanel
         selectedHero={selectedHero}
         onClose={() => dispatch({ type: 'SET_SELECTED_SUPERHEROES', data: null })}
-        myList={myList}
         addToList={(superhero) => handleListUpdate(superhero)}
+        isActive={!!myList[selectedHero.id]}
+        disabled={Object.keys(myList)?.length === 6}
       />
     </div>
   )
