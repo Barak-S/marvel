@@ -48,104 +48,7 @@ Examples:
 
 Read more at the [original post](https://medium.com/@wittydeveloper/react-components-naming-convention-%EF%B8%8F-b50303551505).
 
-### Components import
-
-Each root folder is available globally and should be imported by absolute path.
-
-✅ Correct:
-
-```typescript
-import { ContainedButton } from '@components/Buttons';
-```
-
-❌ Incorrect:
-
-```typescript
-import { ContainedButton } from '../../components/Buttons';
-```
-
-
-### Files & folders structure
-
-**One component per file.** Each component should be placed in a separate folder. The source code should be placed at `index.tsx` file.
-
-✅ Correct:
-
-```
-src
-  components
-    Buttons
-      Submit
-        index.tsx
-```
-
-❌ Incorrect:
-
-```
-src
-  components
-    Buttons
-      ContainedButton.tsx
-```
-
-Place assets in the `./assets` folder next to the component's file.
-
-✅ Correct:
-
-```
-src
-  components
-    Buttons
-      Submit
-        index.tsx
-        assets
-          logo.png
-```
-
-❌ Incorrect:
-
-```
-src
-  components
-    Buttons
-      Submit
-        index.tsx
-        logo.png
-```
-
-Place sub-components in the `./components` folder next to the component's file.
-
-✅ Correct:
-
-```
-src
-  components
-    Forms
-      List
-        index.tsx
-        components
-          Item
-            index.tsx
-```
-
-❌ Incorrect:
-
-```
-src
-  components
-    Forms
-      List
-        Item.tsx
-        index.tsx
-```
-
-The next files can be placed next to the `index.tsx` component's file to reduce the main file size:
-
-- `styles.ts` - Use this file to keep component's styles if they are too big. But it is better to keep them in the same file if they fit on the same screen.
-- `types.ts` - Component specific types, like `ListItem`, `IconType` etc. Do not keep the component's `Props` here. Keep it next to the component's code.
-- `utils.ts` - Different utils required for the component.
-- `view.tsx` - Use this file for keeping component's view-related code if it is too big or the component is too complex.
-- `index.test.tsx`, `utils.test.ts`, etc. - Tests files for the component and it's parts.
+### Components export
 
 Each root folder should contains `index.ts` file and export all of it components. For example `src/components/Auth/index.ts`:
 
@@ -160,7 +63,7 @@ export * from './SectionSplitter';
 This will allows to import components like:
 
 ```typescript
-import { AuthCopyrights } from '@components/Auth';
+import { AuthCopyrights } from './components/Auth';
 ```
 
 ### Component template
