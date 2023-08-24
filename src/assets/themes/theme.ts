@@ -50,7 +50,6 @@ export default createTheme({
         minWidth: 144,
         display: 'flex',
         alignItems: 'center',
-        // color: colors.red,
         fontFamily: mainFont,
         background: colors.white,
         paddingLeft: 10,

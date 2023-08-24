@@ -1,42 +1,45 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { colors, StyleProps } from '../../styles'
-import { AppBar, Container, useMediaQuery, useTheme, Button, makeStyles } from '@material-ui/core'
+import { AppBar, Container, useMediaQuery, useTheme, makeStyles } from '@material-ui/core'
 import Logo from '../../assets/images/Marvel-Comics-logo.png'
-import { FiMenu, FiX } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
-import NavMenuItem from './components/NavMenuItem'
+import NavMenuItem from '../../components/NavMenuItem'
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store'
 
 type Props = StyleProps
 
 const NavBarLayout: FC<Props> = ({ style }) => {
-    const theme = useTheme()
-    const classes = useStyles()
-    const history = useHistory()
-    const [open, setOpen] = useState(false)
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const dispatch = useDispatch()
+  const theme = useTheme()
+  const classes = useStyles()
+  const history = useHistory()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const isMyListOpen: boolean = useSelector((state: RootState) => state.heroReducer.isMyListOpen) || false
 
     return (
-        <AppBar position="fixed" className={classes.appBar}>
-            <Container className={classes.container}>
-                <div className={classes.navigationBar}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img
-                            onClick={()=> !isMobile ? history.push('/') : undefined}
-                            src={Logo}
-                            style={{
-                                height: isMobile ? open ? 36 : 52 : 55,
-                                cursor: 'pointer' ,
-                                display: isMobile ? 'none' : 'initial'
-                            }}
-                        />
-                    </div>
-                    <NavMenuItem
-                      label={'My Team'}
-                    />
-                </div>
-            </Container>
-        </AppBar>
-    )
+      <AppBar position="fixed" className={classes.appBar}>
+        <Container className={classes.container}>
+          <div className={classes.navigationBar}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <img
+                onClick={()=> !isMobile ? history.push('/') : undefined}
+                src={Logo}
+                style={{
+                  height: isMobile ? 52 : 55,
+                  cursor: 'pointer' ,
+                  display: isMobile ? 'none' : 'initial'
+                }}
+              />
+            </div>
+            <NavMenuItem
+              label={'My Team'}
+              handleClick={() => dispatch({ type: 'TOGGLE_MY_LIST', data: !isMyListOpen })}
+            />
+          </div>
+        </Container>
+      </AppBar>
+  )
 }
 
   const useStyles = makeStyles(theme => ({
@@ -52,7 +55,6 @@ const NavBarLayout: FC<Props> = ({ style }) => {
     },
     appBar: {
         boxShadow: 'none',
-        // zIndex: 1,
         backgroundColor: colors.black,
     },
     navigationBar: {
