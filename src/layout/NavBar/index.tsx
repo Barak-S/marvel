@@ -25,7 +25,7 @@ const NavBarLayout: FC<Props> = ({ style }) => {
         <div className={classes.navigationBar}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
-              onClick={()=> !isMobile ? history.push('/') : undefined}
+              onClick={()=> dispatch({ type: 'SET_ALL_SUPERHEROES', data: [] })}
               src={Logo}
               style={{
                 height: isMobile ? 52 : 55,

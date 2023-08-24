@@ -10,26 +10,42 @@ import { PowerStat } from '../PowerStat'
 import { Typography } from '@material-ui/core';
 
 interface Props extends ClassNameProps, StyleProps {}
+interface Powerstats {
+  combat: number;
+  durability: number;
+  intelligence: number;
+  power: number;
+  speed: number;
+  strength: number;
+}
 
 export const MyList: FC<Props> = ({ className, style }) => {
   const dispatch = useDispatch()
   const myList: Record<string, SuperHero> = useSelector((state: RootState) => state.heroReducer.myList) || []
 
-  // console.log('myList: ', myList)
-
   const getAverageAttrs = () => {
-    const result = {
-      combat: '',
-      durability: '',
-      intelligence: '',
-      power: '',
-      speed: '',
-      strength: ''
+    const result: Powerstats = {
+      combat: 0,
+      durability: 0,
+      intelligence: 0,
+      power: 0,
+      speed: 0,
+      strength: 0
     }
 
+    const powers: Array<keyof Powerstats> = ['combat', 'durability', 'intelligence', 'power', 'speed', 'strength'];
     for (const superhero of Object.values(myList)) {
-      console.log('superhero: ', superhero)
+      powers.forEach((power) => {
+        const combatNum = parseInt(superhero.powerstats[power] as any);
+        if (!isNaN(combatNum)) {
+          result[power] += combatNum;
+        }
+      })
     }
+
+    powers.forEach((power) => {
+      result[power] = Math.round((result[power] / (Object.keys(myList)?.length * 100)) * 100)
+    })
 
     return result
   }
@@ -48,18 +64,18 @@ export const MyList: FC<Props> = ({ className, style }) => {
 
   const heroesInList = Object.values(myList)
 
-  const myListAverages = getAverageAttrs()
+  const myListAverages: Powerstats = getAverageAttrs()
 
   return (
     <div className={cx(classes.container, className)} style={style}>
       {heroesInList?.length ? (
         <div className={classes.sectionRow}>
-          <PowerStat label={'Combat'} value={myListAverages.combat} />
-          <PowerStat label={'Durability'} value={myListAverages.durability} />
-          <PowerStat label={'Intelligence'} value={myListAverages.intelligence} />
-          <PowerStat label={'Power'} value={myListAverages.power} />
-          <PowerStat label={'Speed'} value={myListAverages.speed} />
-          <PowerStat label={'Strength'} value={myListAverages.strength} />
+          <PowerStat label={'Combat'} value={myListAverages.combat.toString()} />
+          <PowerStat label={'Durability'} value={myListAverages.durability.toString()} />
+          <PowerStat label={'Intelligence'} value={myListAverages.intelligence.toString()} />
+          <PowerStat label={'Power'} value={myListAverages.power.toString()} />
+          <PowerStat label={'Speed'} value={myListAverages.speed.toString()} />
+          <PowerStat label={'Strength'} value={myListAverages.strength.toString()} />
         </div>
       ) : null}
       <div className={classes.cardWrapper}>
