@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import NavMenuItem from '../../components/NavMenuItem'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store'
+import { SuperHero } from '../../core'
 
 type Props = StyleProps
 
@@ -16,29 +17,35 @@ const NavBarLayout: FC<Props> = ({ style }) => {
   const history = useHistory()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const isMyListOpen: boolean = useSelector((state: RootState) => state.heroReducer.isMyListOpen) || false
+  const myList: SuperHero[] = useSelector((state: RootState) => state.heroReducer.myList) || []
 
-    return (
-      <AppBar position="fixed" className={classes.appBar}>
-        <Container className={classes.container}>
-          <div className={classes.navigationBar}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img
-                onClick={()=> !isMobile ? history.push('/') : undefined}
-                src={Logo}
-                style={{
-                  height: isMobile ? 52 : 55,
-                  cursor: 'pointer' ,
-                  display: isMobile ? 'none' : 'initial'
-                }}
-              />
-            </div>
+  return (
+    <AppBar position="fixed" className={classes.appBar}>
+      <Container className={classes.container}>
+        <div className={classes.navigationBar}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              onClick={()=> !isMobile ? history.push('/') : undefined}
+              src={Logo}
+              style={{
+                height: isMobile ? 52 : 55,
+                cursor: 'pointer' ,
+                display: isMobile ? 'none' : 'initial'
+              }}
+            />
+          </div>
+          <div className={classes.menu}>
             <NavMenuItem
               label={'My Team'}
               handleClick={() => dispatch({ type: 'TOGGLE_MY_LIST', data: !isMyListOpen })}
             />
+            <div className={classes.myListNum}>
+              {Object.keys(myList)?.length || 0}
+            </div>
           </div>
-        </Container>
-      </AppBar>
+        </div>
+      </Container>
+    </AppBar>
   )
 }
 
@@ -94,6 +101,21 @@ const NavBarLayout: FC<Props> = ({ style }) => {
             color: colors.white,
             textShadow: 'none'
         }
+    },
+    menu: {
+      display: 'flex',
+    },
+    myListNum: {
+      backgroundColor: colors.red,
+      color: colors.white,
+      height: 22,
+      width: 22,
+      borderRadius: '50%',
+      fontWeight: 500,
+      fontSize: 12,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
     }
 
   }))

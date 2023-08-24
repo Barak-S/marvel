@@ -62,9 +62,12 @@ const Home: FC<Props> = ({ style }) => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {isMyListOpen ? (
-        <MyList className={classes.myList} />
-      ) : null}
+      <MyList
+        className={classes.myList}
+        style={{
+          transform: isMyListOpen ? 'translateY(0%)' : 'translateY(-100%)'
+        }}
+      />
       <div className={classes.searchContainer}>
         <FormInput
           type="text"
@@ -143,6 +146,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     top: 86,
     zIndex: 3,
+    transition: '0.3s ease'
   }
 }))
 

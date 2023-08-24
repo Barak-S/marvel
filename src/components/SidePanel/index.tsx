@@ -59,20 +59,20 @@ export const SidePanel: FC<Props> = ({ selectedHero, onClose, myList, addToList,
           <div className={classes.moreDetailsSection}>
             <div className={classes.sectionCol}>
               <Typography className={cx(classes.sectionTitle, classes.sectionTitleSub)}>Apperance</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Gender</strong>{selectedHero?.appearance?.['gender'] || 'N/A'}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Height</strong>{selectedHero?.appearance?.['height'] || 'N/A'}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Weight</strong>{selectedHero?.appearance?.['weight'].map((item: string) => item)}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Eye Color</strong>{selectedHero?.appearance?.['eye-color'] || 'N/A'}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Hair Color</strong>{selectedHero?.appearance?.['hair-color'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Gender</strong>{selectedHero?.appearance?.['gender'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Height</strong>{selectedHero?.appearance?.['height'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Weight</strong>{selectedHero?.appearance?.['weight'].map((item: string) => item)}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Eye Color</strong>{selectedHero?.appearance?.['eye-color'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Hair Color</strong>{selectedHero?.appearance?.['hair-color'] || 'N/A'}</Typography>
             </div>
             <div className={classes.sectionCol}>
               <Typography className={classes.sectionTitle}>Biography</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Full Name</strong>{selectedHero?.biography?.['full-name'] || 'N/A'}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Place of Birth</strong>{selectedHero?.biography?.['place-of-birth'] || 'N/A'}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Alter Egos</strong>{selectedHero?.biography?.['alter-egos'] || 'N/A'}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Aliases</strong>{selectedHero?.biography?.['aliases'].map((item: string) => item)}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>First Appearance</strong>{selectedHero?.biography?.['first-appearance'] || 'N/A'}</Typography>
-              <Typography className={classes.sectionDetails}><strong style={{ color: colors.red, fontWeight: 500, paddingRight: 8 }}>Publisher</strong>{selectedHero?.biography?.['publisher'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Full Name</strong>{selectedHero?.biography?.['full-name'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Place of Birth</strong>{selectedHero?.biography?.['place-of-birth'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Alter Egos</strong>{selectedHero?.biography?.['alter-egos'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Aliases</strong>{selectedHero?.biography?.['aliases'].map((item: string) => item)}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>First Appearance</strong>{selectedHero?.biography?.['first-appearance'] || 'N/A'}</Typography>
+              <Typography className={classes.sectionDetails}><strong className={classes.heroAttr}>Publisher</strong>{selectedHero?.biography?.['publisher'] || 'N/A'}</Typography>
             </div>
           </div>
         </div>
@@ -177,6 +177,11 @@ const useStyles = makeStyles(theme => ({
     gap: 20,
     flexWrap: 'wrap'
   },
+  heroAttr: {
+    color: colors.red,
+    fontWeight: 500,
+    paddingRight: 8
+  }
 }))
 
 export default SidePanel
